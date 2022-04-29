@@ -16,10 +16,10 @@ import java.util.ArrayList;
 
 public class ExamGridViewAdapter extends BaseAdapter {
     private Context context;
-    private String[] index;
+    private int[] index;
     private ArrayList<Question> questionList;
     private LayoutInflater inflater;
-    public ExamGridViewAdapter(Context context, String[] index) {
+    public ExamGridViewAdapter(Context context, int[] index) {
         this.context = context;
         this.index = index;
         inflater = (LayoutInflater.from(context));
@@ -46,7 +46,7 @@ public class ExamGridViewAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.gridview_row, viewGroup, false);
         Button button = (Button) view.findViewById(R.id.button_id);
 
-        button.setText(index[i]);
+        button.setText(String.valueOf(index[i]));
 
         return view;
     }

@@ -100,29 +100,40 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <CheckBox
+                <RadioGroup
+                    android:id="@+id/radioGroup"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:checked="false"
-                    android:text="Dumb text" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal">
 
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:checked="false"
-                    android:text="Dumb text" />
+                    <RadioButton
+                        android:id="@+id/option1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checked="false"
+                        android:text="Dumb text" />
 
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:checked="false"
-                    android:text="Dumb text" />
+                    <RadioButton
+                        android:id="@+id/option2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checked="false"
+                        android:text="Dumb text" />
 
-                <CheckBox
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:checked="false"
-                    android:text="Dumb text" />
+                    <RadioButton
+                        android:id="@+id/option3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checked="false"
+                        android:text="Dumb text" />
+
+                    <RadioButton
+                        android:id="@+id/option4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:checked="false"
+                        android:text="Dumb text" />
+                </RadioGroup>
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
@@ -163,7 +174,8 @@
         <GridView
             android:id="@+id/grid_view"
             android:layout_width="400dp"
-            android:layout_height="100dp" />
+            android:layout_height="100dp"
+            android:numColumns="12" />
     </LinearLayout>
 
 

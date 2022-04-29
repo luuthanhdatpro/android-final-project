@@ -29,14 +29,14 @@ public class MainActivity extends AppCompatActivity {
         cvTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TestGridActivity.class);
+                Intent intent = new Intent(MainActivity.this, ExamStartActivity.class);
                 startActivity(intent);
             }
         });
         buttonTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, TestGridActivity.class);
+                Intent intent = new Intent(MainActivity.this, ExamStartActivity.class);
                 startActivity(intent);
             }
         });
