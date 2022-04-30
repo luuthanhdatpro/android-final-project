@@ -34,7 +34,7 @@ public class ReviewActivity extends AppCompatActivity {
     Random random;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
-    int currentScore = 0, questionAttemped = 1, currentPos;
+    int questionAttemped = 1, currentPos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -239,16 +239,23 @@ public class ReviewActivity extends AppCompatActivity {
         }else {
             questionNum.setText("Câu"+(currentPos+1)+"/"+questionList.size());
         }
+
         question.setText(questionList.get(currentPos).getTitle());
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());
         rb3.setText(questionList.get(currentPos).getOption3());
         rb4.setText(questionList.get(currentPos).getOption4());
+        if(questionList.get(currentPos).getOption3()==null)
+            rb3.setVisibility(View.INVISIBLE);
+        if(questionList.get(currentPos).getOption4()==null)
+            rb4.setVisibility(View.INVISIBLE);
 
     }
     private void getQuizQuestion(ArrayList<Question> questionList){
         questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
         questionList.get(0).setEssential(true);
+        questionList.get(0).setOption3(null);
+        questionList.get(0).setOption4(null);
         questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
         questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
         questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));

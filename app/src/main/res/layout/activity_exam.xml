@@ -23,12 +23,14 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
+            android:id="@+id/button_exit_exam"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:background="@color/white"
             android:src="@drawable/close" />
 
         <TextView
+            android:id="@+id/tv_timer"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_marginLeft="80dp"
@@ -40,6 +42,7 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/button_submit"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:layout_gravity="right"
@@ -52,7 +55,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_question_id_exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -65,10 +68,9 @@
         app:layout_constraintVertical_bias="0.276" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_question_exam"
         android:layout_width="378dp"
         android:layout_height="184dp"
-
         android:layout_marginStart="16dp"
         android:text="Câu hỏi"
         android:textStyle="bold"
@@ -91,7 +93,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.675">
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -135,10 +137,11 @@
                         android:text="Dumb text" />
                 </RadioGroup>
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
     </androidx.cardview.widget.CardView>
 
     <ImageButton
+        android:id="@+id/button_back_exam"
         android:layout_width="40dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -151,6 +154,7 @@
         app:layout_constraintVertical_bias="0.989" />
 
     <ImageButton
+        android:id="@+id/button_next_exam"
         android:layout_width="40dp"
         android:layout_height="50dp"
         android:layout_marginStart="360dp"
@@ -164,7 +168,7 @@
 
     <LinearLayout
         android:layout_width="410dp"
-        android:layout_height="110dp"
+        android:layout_height="90dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +178,7 @@
         <GridView
             android:id="@+id/grid_view"
             android:layout_width="400dp"
-            android:layout_height="100dp"
+            android:layout_height="90dp"
             android:numColumns="12" />
     </LinearLayout>
 

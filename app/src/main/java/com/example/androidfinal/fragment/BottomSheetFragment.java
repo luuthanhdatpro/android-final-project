@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +19,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BottomSheetFragment extends BottomSheetDialogFragment {
     private ArrayList<Question> questionList;
@@ -36,7 +34,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) super.onCreateDialog(savedInstanceState);
 
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_list, null);
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.bottom_sheet_question, null);
         bottomSheetDialog.setContentView(view);
 
         RecyclerView recyclerViewData = view.findViewById(R.id.rcv_list);

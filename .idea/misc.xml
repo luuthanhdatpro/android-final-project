@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidFinal/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2595" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/drawable/check.xml" value="0.124" />
         <entry key="..\:/AndroidFinal/app/src/main/res/drawable/corner_radius.xml" value="0.2595" />
         <entry key="..\:/AndroidFinal/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2595" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_exam.xml" value="0.25" />
@@ -12,6 +13,7 @@
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_result.xml" value="0.25416666666666665" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_result2.xml" value="0.16822916666666668" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_review.xml" value="0.16822916666666668" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_setting.xml" value="0.16822916666666668" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_signal.xml" value="0.2" />
