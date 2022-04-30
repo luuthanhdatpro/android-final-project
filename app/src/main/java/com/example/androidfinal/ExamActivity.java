@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -47,7 +48,8 @@ public class ExamActivity extends AppCompatActivity {
         function();
     }
     private void init(){
-        gridView = (GridView) findViewById(R.id.grid_view);
+        questionList = new ArrayList<>();
+        gridView = findViewById(R.id.grid_view);
         ExamGridViewAdapter gridViewAdapter = new ExamGridViewAdapter(this,index);
         gridView.setAdapter(gridViewAdapter);
         buttonExit = findViewById(R.id.button_exit_exam);
@@ -67,6 +69,15 @@ public class ExamActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
+        getQuizQuestion(questionList);
+        setDatatoView(currentPos);
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return motionEvent.getAction() == MotionEvent.ACTION_MOVE;
+            }
+        });
+        gridView.setVerticalScrollBarEnabled(false);
     }
     private void function(){
         countDownTimer = new CountDownTimer(duration, 1000) {
@@ -248,7 +259,7 @@ public class ExamActivity extends AppCompatActivity {
         });
     }
     private void setDatatoView(int currentPos){
-        textViewQuestionNum.setText("Câu"+(currentPos+1)+"/"+questionList.size());
+        textViewQuestionNum.setText("Câu "+(currentPos+1)+"/"+questionList.size()+":");
         textViewQuestion.setText(questionList.get(currentPos).getTitle());
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());
@@ -256,8 +267,30 @@ public class ExamActivity extends AppCompatActivity {
         rb4.setText(questionList.get(currentPos).getOption4());
         if(questionList.get(currentPos).getOption3()==null)
             rb3.setVisibility(View.INVISIBLE);
+        else
+            rb3.setVisibility(View.VISIBLE);
         if(questionList.get(currentPos).getOption4()==null)
             rb4.setVisibility(View.INVISIBLE);
+        else
+            rb4.setVisibility(View.VISIBLE);
+    }
+
+    private void getQuizQuestion(ArrayList<Question> questionList){
+        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
+        questionList.get(0).setEssential(true);
+        questionList.get(0).setOption3(null);
+        questionList.get(0).setOption4(null);
+        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
+        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
+        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.get(5).setEssential(true);
+        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test11","1.Wrong","2.Wrong","3.Wrong","4.True",4));
 
     }
 }

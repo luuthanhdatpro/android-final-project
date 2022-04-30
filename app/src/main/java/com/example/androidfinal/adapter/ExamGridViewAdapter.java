@@ -44,7 +44,7 @@ public class ExamGridViewAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
 
         view = inflater.inflate(R.layout.gridview_row, viewGroup, false);
-        Button button = (Button) view.findViewById(R.id.button_id);
+        Button button = view.findViewById(R.id.button_id);
 
         button.setText(String.valueOf(index[i]));
 

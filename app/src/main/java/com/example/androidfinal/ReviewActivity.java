@@ -247,9 +247,12 @@ public class ReviewActivity extends AppCompatActivity {
         rb4.setText(questionList.get(currentPos).getOption4());
         if(questionList.get(currentPos).getOption3()==null)
             rb3.setVisibility(View.INVISIBLE);
+        else
+            rb3.setVisibility(View.VISIBLE);
         if(questionList.get(currentPos).getOption4()==null)
             rb4.setVisibility(View.INVISIBLE);
-
+        else
+            rb4.setVisibility(View.VISIBLE);
     }
     private void getQuizQuestion(ArrayList<Question> questionList){
         questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
