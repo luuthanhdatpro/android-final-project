@@ -73,18 +73,8 @@ public class ExamActivity extends AppCompatActivity {
         editor.apply();
         getQuizQuestion(questionList);
         setDatatoView(currentPos);
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-            }
-        });
-        gridView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                return motionEvent.getAction() == MotionEvent.ACTION_MOVE;
-            }
-        });
+        Log.i("child count", String.valueOf(gridView.getChildCount()));
         gridView.setVerticalScrollBarEnabled(false);
 
     }
@@ -261,6 +251,17 @@ public class ExamActivity extends AppCompatActivity {
                     break;
             }
         });
+        gridView.setOnItemClickListener((adapterView, view, i, l) -> {
+            setDatatoView(i);
+            Log.i("i",String.valueOf(i));
+        });
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return motionEvent.getAction() == MotionEvent.ACTION_MOVE;
+            }
+        });
+
     }
     private void setDatatoView(int currentPos){
 

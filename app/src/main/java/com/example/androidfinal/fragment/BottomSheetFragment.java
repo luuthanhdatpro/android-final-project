@@ -29,6 +29,26 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         this.onclickListener = onclickListener;
     }
 
+    public BottomSheetFragment(ArrayList<Question> questionList) {
+        this.questionList = questionList;
+    }
+
+    public ArrayList<Question> getQuestionList() {
+        return questionList;
+    }
+
+    public void setQuestionList(ArrayList<Question> questionList) {
+        this.questionList = questionList;
+    }
+
+    public OnclickListener getOnclickListener() {
+        return onclickListener;
+    }
+
+    public void setOnclickListener(OnclickListener onclickListener) {
+        this.onclickListener = onclickListener;
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {

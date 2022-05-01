@@ -22,7 +22,7 @@ public class ExamGridViewAdapter extends BaseAdapter {
     public ExamGridViewAdapter(Context context, int[] index) {
         this.context = context;
         this.index = index;
-        inflater = (LayoutInflater.from(context));
+        this.inflater = (LayoutInflater.from(context));
     }
 
     @Override
@@ -42,11 +42,12 @@ public class ExamGridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        if(view == null){
+            view = inflater.inflate(R.layout.gridview_row, viewGroup, false);
+        }
 
-        view = inflater.inflate(R.layout.gridview_row, viewGroup, false);
-        Button button = view.findViewById(R.id.button_id);
-
-        button.setText(String.valueOf(index[i]));
+        TextView textView = view.findViewById(R.id.tv_id_grid);
+        textView.setText(String.valueOf(index[i]));
 
         return view;
     }

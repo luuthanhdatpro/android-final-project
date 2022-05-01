@@ -220,12 +220,15 @@ public class ReviewActivity extends AppCompatActivity {
 
     }
     private void clickOpenBottomSheet() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList, new OnclickListener() {
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList);
+        bottomSheetFragment.setOnclickListener(new OnclickListener() {
             @Override
             public void clickItem(Question question) {
-
+                setDatatoView(question.getId()-1);
+                bottomSheetFragment.dismiss();
             }
         });
+
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
     private void setDatatoView(int currentPos){
