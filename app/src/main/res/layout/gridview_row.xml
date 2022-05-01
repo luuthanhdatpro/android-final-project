@@ -11,6 +11,6 @@
         android:layout_gravity="center"
         android:text="1"
         android:textSize="10dp"
-        android:textAlignment="viewStart"
+        android:textAlignment="center"
         android:layout_marginLeft="2dp"/>
 </LinearLayout>

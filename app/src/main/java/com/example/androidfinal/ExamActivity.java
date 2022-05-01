@@ -11,6 +11,7 @@ import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
@@ -40,6 +41,7 @@ public class ExamActivity extends AppCompatActivity {
     private int currentPos;
     private int[] index={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     final long duration = TimeUnit.MINUTES.toMillis(22);
+    private int[] doneQuestion= new int[35];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,12 @@ public class ExamActivity extends AppCompatActivity {
         editor.apply();
         getQuizQuestion(questionList);
         setDatatoView(currentPos);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
         gridView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -78,6 +86,7 @@ public class ExamActivity extends AppCompatActivity {
             }
         });
         gridView.setVerticalScrollBarEnabled(false);
+
     }
     private void function(){
         countDownTimer = new CountDownTimer(duration, 1000) {
@@ -92,6 +101,7 @@ public class ExamActivity extends AppCompatActivity {
             public void onFinish() {
                 countDownTimer.cancel();
                 Intent intent = new Intent(ExamActivity.this, ResultActivity.class);
+                intent.putExtra("doneQuestion",doneQuestion);
                 startActivity(intent);
             }
         }.start();
@@ -140,54 +150,44 @@ public class ExamActivity extends AppCompatActivity {
         });
         rb1.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb1.getText().toString().substring(0,1))){
-                rb1.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),1).apply();
+                doneQuestion[currentPos] = 1;
             }
             else{
-                rb1.setBackgroundColor(Color.RED);
+                doneQuestion[currentPos] = 2;
             }
-            for(int i = 0; i < rg.getChildCount(); i++){
-                rg.getChildAt(i).setClickable(false);
-            }
+
         });
         rb2.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb2.getText().toString().substring(0,1))){
-                rb2.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),2).apply();
+                doneQuestion[currentPos] = 1;
             }
             else{
-                rb2.setBackgroundColor(Color.RED);
+                doneQuestion[currentPos] = 2;
             }
-            for(int i = 0; i < rg.getChildCount(); i++){
-                rg.getChildAt(i).setClickable(false);
-            }
+
         });
         rb3.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb3.getText().toString().substring(0,1))){
-                rb3.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),3).apply();
+                doneQuestion[currentPos] = 1;
             }
             else{
-                rb3.setBackgroundColor(Color.RED);
-            }
-            for(int i = 0; i < rg.getChildCount(); i++){
-                rg.getChildAt(i).setClickable(false);
+                doneQuestion[currentPos] = 2;
             }
         });
         rb4.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb4.getText().toString().substring(0,1))){
-                rb4.setBackgroundColor(Color.GREEN);
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),4).apply();
+                doneQuestion[currentPos] = 1;
             }
             else{
-                rb4.setBackgroundColor(Color.RED);
-            }
-            for(int i = 0; i < rg.getChildCount(); i++){
-                rg.getChildAt(i).setClickable(false);
+                doneQuestion[currentPos] = 2;
             }
         });
         buttonBack.setOnClickListener(view -> {
@@ -226,6 +226,10 @@ public class ExamActivity extends AppCompatActivity {
             }
         });
         buttonNext.setOnClickListener(view -> {
+            Log.i("tag",String.valueOf(doneQuestion[currentPos]));
+//            if(rg.getCheckedRadioButtonId()==-1){
+//                doneQuestion[currentPos]=2;
+//            }
             buttonBack.setClickable(true);
             if(currentPos < questionList.size() - 1){
                 buttonNext.setClickable(true);
@@ -259,6 +263,7 @@ public class ExamActivity extends AppCompatActivity {
         });
     }
     private void setDatatoView(int currentPos){
+
         textViewQuestionNum.setText("Câu "+(currentPos+1)+"/"+questionList.size()+":");
         textViewQuestion.setText(questionList.get(currentPos).getTitle());
         rb1.setText(questionList.get(currentPos).getOption1());
