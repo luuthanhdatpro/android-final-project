@@ -2,15 +2,12 @@ package com.example.androidfinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -18,9 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidfinal.fragment.BottomSheetFragment;
-import com.example.androidfinal.inteface.OnclickListener;
+import com.example.androidfinal.inteface.BottomSheetOnclickListener;
 import com.example.androidfinal.model.Question;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -221,7 +217,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
     private void clickOpenBottomSheet() {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList);
-        bottomSheetFragment.setOnclickListener(new OnclickListener() {
+        bottomSheetFragment.setOnclickListener(new BottomSheetOnclickListener() {
             @Override
             public void clickItem(Question question) {
                 setDatatoView(question.getId()-1);

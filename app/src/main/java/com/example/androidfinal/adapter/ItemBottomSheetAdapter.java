@@ -11,20 +11,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidfinal.R;
-import com.example.androidfinal.inteface.OnclickListener;
+import com.example.androidfinal.inteface.BottomSheetOnclickListener;
 import com.example.androidfinal.model.Question;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomSheetAdapter.ItemViewHolder>{
 
     private ArrayList<Question> questionList;
-    private OnclickListener onclickListener;
+    private BottomSheetOnclickListener bottomSheetOnclickListener;
 
-    public ItemBottomSheetAdapter(ArrayList<Question> questionList, OnclickListener onclickListener) {
+    public ItemBottomSheetAdapter(ArrayList<Question> questionList, BottomSheetOnclickListener bottomSheetOnclickListener) {
         this.questionList = questionList;
-        this.onclickListener = onclickListener;
+        this.bottomSheetOnclickListener = bottomSheetOnclickListener;
     }
 
     @NonNull
@@ -47,12 +46,7 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
             holder.imageEssen.setVisibility(View.VISIBLE);
         if (question.getImage() != null)
             holder.imageQues.setVisibility(View.VISIBLE);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onclickListener.clickItem(question);
-            }
-        });
+        holder.cardView.setOnClickListener(view -> bottomSheetOnclickListener.clickItem(question));
     }
 
     @Override

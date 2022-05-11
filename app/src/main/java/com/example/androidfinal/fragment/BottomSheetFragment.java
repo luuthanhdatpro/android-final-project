@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidfinal.R;
 import com.example.androidfinal.adapter.ItemBottomSheetAdapter;
-import com.example.androidfinal.inteface.OnclickListener;
+import com.example.androidfinal.inteface.BottomSheetOnclickListener;
 import com.example.androidfinal.model.Question;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -22,11 +22,11 @@ import java.util.ArrayList;
 
 public class BottomSheetFragment extends BottomSheetDialogFragment {
     private ArrayList<Question> questionList;
-    private OnclickListener onclickListener;
+    private BottomSheetOnclickListener bottomSheetOnclickListener;
 
-    public BottomSheetFragment(ArrayList<Question> questionList, OnclickListener onclickListener) {
+    public BottomSheetFragment(ArrayList<Question> questionList, BottomSheetOnclickListener bottomSheetOnclickListener) {
         this.questionList = questionList;
-        this.onclickListener = onclickListener;
+        this.bottomSheetOnclickListener = bottomSheetOnclickListener;
     }
 
     public BottomSheetFragment(ArrayList<Question> questionList) {
@@ -41,12 +41,12 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         this.questionList = questionList;
     }
 
-    public OnclickListener getOnclickListener() {
-        return onclickListener;
+    public BottomSheetOnclickListener getOnclickListener() {
+        return bottomSheetOnclickListener;
     }
 
-    public void setOnclickListener(OnclickListener onclickListener) {
-        this.onclickListener = onclickListener;
+    public void setOnclickListener(BottomSheetOnclickListener bottomSheetOnclickListener) {
+        this.bottomSheetOnclickListener = bottomSheetOnclickListener;
     }
 
     @NonNull
@@ -61,10 +61,10 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewData.setLayoutManager(linearLayoutManager);
 
-        ItemBottomSheetAdapter itemBottomSheetAdapter = new ItemBottomSheetAdapter(questionList, new OnclickListener() {
+        ItemBottomSheetAdapter itemBottomSheetAdapter = new ItemBottomSheetAdapter(questionList, new BottomSheetOnclickListener() {
             @Override
             public void clickItem(Question question) {
-                onclickListener.clickItem(question);
+                bottomSheetOnclickListener.clickItem(question);
             }
         });
         recyclerViewData.setAdapter(itemBottomSheetAdapter);

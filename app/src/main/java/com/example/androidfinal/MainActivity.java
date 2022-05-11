@@ -26,19 +26,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        cvTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ExamStartActivity.class);
-                startActivity(intent);
-            }
+        cvTest.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ExamListActivity.class);
+            startActivity(intent);
         });
-        buttonTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ExamStartActivity.class);
-                startActivity(intent);
-            }
+        buttonTest.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ExamListActivity.class);
+            startActivity(intent);
         });
     }
 }
