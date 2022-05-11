@@ -225,6 +225,7 @@ public class ReviewActivity extends AppCompatActivity {
             @Override
             public void clickItem(Question question) {
                 setDatatoView(question.getId()-1);
+                currentPos = question.getId();
                 bottomSheetFragment.dismiss();
             }
         });
@@ -244,6 +245,11 @@ public class ReviewActivity extends AppCompatActivity {
         }
 
         question.setText(questionList.get(currentPos).getTitle());
+        if(questionList.get(currentPos).getImage()!=null) {
+            String image = "@drawable/" + questionList.get(currentPos).getImage();
+            int imageResource = getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, getPackageName());
+            question.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, imageResource);
+        }
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());
         rb3.setText(questionList.get(currentPos).getOption3());

@@ -6,11 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -34,12 +36,15 @@ public class ExamActivity extends AppCompatActivity {
     private Button buttonSubmit;
     private ArrayList<Question> questionList;
     private RadioGroup rg;
+    private ExamGridViewAdapter gridViewAdapter;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     private TextView textViewTimer, textViewQuestionNum, textViewQuestion;
     private CountDownTimer countDownTimer;
     private int currentPos;
-    private int[] index={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+    private int[] index2={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+    private int[] index={1,2,3,4,5,6,7,8,9,10,11};
+    private boolean[] isDone = new boolean[11];
     final long duration = TimeUnit.MINUTES.toMillis(22);
     private int[] doneQuestion= new int[35];
     @Override
@@ -52,7 +57,7 @@ public class ExamActivity extends AppCompatActivity {
     private void init(){
         questionList = new ArrayList<>();
         gridView = findViewById(R.id.grid_view);
-        ExamGridViewAdapter gridViewAdapter = new ExamGridViewAdapter(this,index);
+        gridViewAdapter = new ExamGridViewAdapter(this,index,isDone);
         gridView.setAdapter(gridViewAdapter);
         buttonExit = findViewById(R.id.button_exit_exam);
         buttonSubmit = findViewById(R.id.button_submit);
@@ -76,6 +81,7 @@ public class ExamActivity extends AppCompatActivity {
 
         Log.i("child count", String.valueOf(gridView.getChildCount()));
         gridView.setVerticalScrollBarEnabled(false);
+
 
     }
     private void function(){
@@ -143,9 +149,11 @@ public class ExamActivity extends AppCompatActivity {
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),1).apply();
                 doneQuestion[currentPos] = 1;
+                isDone[currentPos]=true;
             }
             else{
                 doneQuestion[currentPos] = 2;
+                isDone[currentPos]=true;
             }
 
         });
@@ -154,9 +162,11 @@ public class ExamActivity extends AppCompatActivity {
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),2).apply();
                 doneQuestion[currentPos] = 1;
+                isDone[currentPos]=true;
             }
             else{
                 doneQuestion[currentPos] = 2;
+                isDone[currentPos]=true;
             }
 
         });
@@ -165,9 +175,11 @@ public class ExamActivity extends AppCompatActivity {
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),3).apply();
                 doneQuestion[currentPos] = 1;
+                isDone[currentPos]=true;
             }
             else{
                 doneQuestion[currentPos] = 2;
+                isDone[currentPos]=true;
             }
         });
         rb4.setOnClickListener(view -> {
@@ -175,9 +187,11 @@ public class ExamActivity extends AppCompatActivity {
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),4).apply();
                 doneQuestion[currentPos] = 1;
+                isDone[currentPos]=true;
             }
             else{
                 doneQuestion[currentPos] = 2;
+                isDone[currentPos]=true;
             }
         });
         buttonBack.setOnClickListener(view -> {
@@ -252,6 +266,7 @@ public class ExamActivity extends AppCompatActivity {
             }
         });
         gridView.setOnItemClickListener((adapterView, view, i, l) -> {
+            currentPos=i;
             setDatatoView(i);
             Log.i("i",String.valueOf(i));
         });
@@ -264,9 +279,27 @@ public class ExamActivity extends AppCompatActivity {
 
     }
     private void setDatatoView(int currentPos){
+        gridViewAdapter.notifyDataSetChanged();
+//        gridViewAdapter = new ExamGridViewAdapter(this,index){
+//            @Override
+//            public View getView(int i, View view, ViewGroup viewGroup) {
+//                View result = super.getView(i,view,viewGroup);
+//                TextView textView = result.findViewById(R.id.tv_id_grid);
+//                if(questionList.get(i).isLearned()==true)
+//                    textView.setBackgroundColor(Color.YELLOW);
+//                textView.setText(String.valueOf(index[i]));
+//                return result;
+//            }
+//        };
+        //gridView.setAdapter(gridViewAdapter);
 
         textViewQuestionNum.setText("Câu "+(currentPos+1)+"/"+questionList.size()+":");
         textViewQuestion.setText(questionList.get(currentPos).getTitle());
+        if(questionList.get(currentPos).getImage()!=null) {
+            String image = "@drawable/" + questionList.get(currentPos).getImage();
+            int imageResource = getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, getPackageName());
+            textViewQuestion.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, imageResource);
+        }
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());
         rb3.setText(questionList.get(currentPos).getOption3());
@@ -284,6 +317,7 @@ public class ExamActivity extends AppCompatActivity {
     private void getQuizQuestion(ArrayList<Question> questionList){
         questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
         questionList.get(0).setEssential(true);
+        questionList.get(0).setImage("car.png");
         questionList.get(0).setOption3(null);
         questionList.get(0).setOption4(null);
         questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
