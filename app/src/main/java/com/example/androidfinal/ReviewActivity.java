@@ -200,12 +200,9 @@ public class ReviewActivity extends AppCompatActivity {
             Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
             startActivity(intent);
         });
-        bSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                bSave.setBackgroundColor(Color.YELLOW);
-                questionList.get(currentPos).setSaved(true);
-            }
+        bSave.setOnClickListener(view -> {
+            bSave.setBackgroundColor(Color.YELLOW);
+            questionList.get(currentPos).setSaved(true);
         });
         bBTS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,13 +214,10 @@ public class ReviewActivity extends AppCompatActivity {
     }
     private void clickOpenBottomSheet() {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList);
-        bottomSheetFragment.setOnclickListener(new BottomSheetOnclickListener() {
-            @Override
-            public void clickItem(Question question) {
-                setDatatoView(question.getId()-1);
-                currentPos = question.getId();
-                bottomSheetFragment.dismiss();
-            }
+        bottomSheetFragment.setOnclickListener(question -> {
+            setDatatoView(question.getId()-1);
+            currentPos = question.getId();
+            bottomSheetFragment.dismiss();
         });
 
         bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
@@ -245,6 +239,8 @@ public class ReviewActivity extends AppCompatActivity {
             String image = "@drawable/" + questionList.get(currentPos).getImage();
             int imageResource = getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, getPackageName());
             question.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, imageResource);
+        }else{
+            question.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
         }
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());

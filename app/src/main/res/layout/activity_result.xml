@@ -105,14 +105,22 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:numColumns="15"
-        android:columnWidth="3dp"
-        android:layout_marginTop="50dp"
-        android:layout_gravity="center">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="350dp"
+        android:layout_height="302dp"
+        android:layout_gravity="center_horizontal"
 
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="30dp">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:columnWidth="3dp"
+            android:numColumns="15">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

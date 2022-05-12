@@ -42,9 +42,8 @@ public class ExamActivity extends AppCompatActivity {
     private TextView textViewTimer, textViewQuestionNum, textViewQuestion;
     private CountDownTimer countDownTimer;
     private int currentPos;
-    private int[] index2={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
-    private int[] index={1,2,3,4,5,6,7,8,9,10,11};
-    private boolean[] isDone = new boolean[11];
+    private int[] index={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+    private boolean[] isDone = new boolean[35];
     final long duration = TimeUnit.MINUTES.toMillis(22);
     private int[] doneQuestion= new int[35];
     @Override
@@ -98,6 +97,7 @@ public class ExamActivity extends AppCompatActivity {
                 countDownTimer.cancel();
                 Intent intent = new Intent(ExamActivity.this, ResultActivity.class);
                 intent.putExtra("doneQuestion",doneQuestion);
+                intent.putExtra("questionList",questionList);
                 startActivity(intent);
             }
         }.start();
@@ -297,8 +297,11 @@ public class ExamActivity extends AppCompatActivity {
         textViewQuestion.setText(questionList.get(currentPos).getTitle());
         if(questionList.get(currentPos).getImage()!=null) {
             String image = "@drawable/" + questionList.get(currentPos).getImage();
+            Log.i("image",image);
             int imageResource = getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, getPackageName());
             textViewQuestion.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, imageResource);
+        }else{
+            textViewQuestion.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
         }
         rb1.setText(questionList.get(currentPos).getOption1());
         rb2.setText(questionList.get(currentPos).getOption2());
@@ -317,7 +320,7 @@ public class ExamActivity extends AppCompatActivity {
     private void getQuizQuestion(ArrayList<Question> questionList){
         questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
         questionList.get(0).setEssential(true);
-        questionList.get(0).setImage("car.png");
+        questionList.get(0).setImage("exam1.png");
         questionList.get(0).setOption3(null);
         questionList.get(0).setOption4(null);
         questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
@@ -330,7 +333,31 @@ public class ExamActivity extends AppCompatActivity {
         questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
         questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
         questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test11","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-
+        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
+        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
+        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
+        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
+        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
+        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
+        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+        questionList.get(20).setImage("car.png");
     }
 }

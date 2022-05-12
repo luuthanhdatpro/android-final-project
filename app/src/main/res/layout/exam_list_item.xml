@@ -7,6 +7,7 @@
         android:id="@+id/cardview_exam_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         app:cardCornerRadius="8dp"
         android:layout_marginTop="15dp"
         app:cardElevation="0dp">
