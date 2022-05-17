@@ -21,10 +21,10 @@ import java.util.ArrayList;
 public class ResultActivity extends AppCompatActivity {
     private ImageButton buttonExitExam;
     private Button buttonRetry;
-    private TextView textViewRight, textViewWrong, textViewNotDone;
-    private int[] doneQuestion;
+    private TextView textViewRight, textViewWrong, textViewNotDone, textViewResult;
+    private int[] doneQuestion, essQuestion;
     private ArrayList<Question> questionList, rightAns, wrongAns, notAns;
-    private int countRight,countWrong,countNot;
+    private int countRight, countWrong, countNot, countEss;
     private RecyclerView recyclerView;
     private ExamResultAdapter examResultAdapter;
     @Override
@@ -32,16 +32,18 @@ public class ResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         init();
+        resultProcess();
         function();
     }
     private void init(){
-
+        textViewResult = findViewById(R.id.tv_final_result);
         buttonExitExam = findViewById(R.id.button_exit_result);
         buttonRetry = findViewById(R.id.button_retry);
         textViewRight = findViewById(R.id.tv_rightanswer);
         textViewWrong = findViewById(R.id.tv_wronganswer);
         textViewNotDone = findViewById(R.id.tv_notdoneanswer);
         Intent intent = this.getIntent();
+        essQuestion = intent.getIntArrayExtra("essQuestion");
         doneQuestion = intent.getIntArrayExtra("doneQuestion");
         questionList = (ArrayList<Question>) intent.getSerializableExtra("questionList");
         rightAns = new ArrayList<>();
@@ -49,8 +51,12 @@ public class ResultActivity extends AppCompatActivity {
         notAns = new ArrayList<>();
         recyclerView = findViewById(R.id.recycle_result);
         countRight = 0;
+        countEss = 0;
         countWrong = 0;
         countNot = 0;
+
+    }
+    private void resultProcess(){
         for(int i = 0; i < doneQuestion.length; i++){
             if(doneQuestion[i]==0){
                 notAns.add(questionList.get(i));
@@ -62,6 +68,9 @@ public class ResultActivity extends AppCompatActivity {
                 wrongAns.add(questionList.get(i));
                 countWrong++;
             }
+
+            if(essQuestion[i]==1)
+                countEss++;
         }
         textViewRight.setText(countRight+" Đúng");
         textViewWrong.setText(countWrong+" Sai");
@@ -75,6 +84,12 @@ public class ResultActivity extends AppCompatActivity {
 
         examResultAdapter.setData(questionList);
         recyclerView.setAdapter(examResultAdapter);
+        if(countRight < 32|| countEss>0){
+            textViewResult.setText("Bạn đã thi trượt");
+        }else{
+            textViewResult.setText("Bạn đã thi đỗ");
+            textViewResult.setBackgroundColor(R.color.green);
+        }
     }
     private void function(){
         buttonExitExam.setOnClickListener(new View.OnClickListener() {

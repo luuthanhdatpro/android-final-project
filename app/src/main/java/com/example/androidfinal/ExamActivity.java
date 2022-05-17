@@ -46,6 +46,7 @@ public class ExamActivity extends AppCompatActivity {
     private boolean[] isDone = new boolean[35];
     final long duration = TimeUnit.MINUTES.toMillis(22);
     private int[] doneQuestion= new int[35];
+    private int[] essQuestion = new int[35];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +97,7 @@ public class ExamActivity extends AppCompatActivity {
             public void onFinish() {
                 countDownTimer.cancel();
                 Intent intent = new Intent(ExamActivity.this, ResultActivity.class);
+                intent.putExtra("essQuestion",essQuestion);
                 intent.putExtra("doneQuestion",doneQuestion);
                 intent.putExtra("questionList",questionList);
                 startActivity(intent);
@@ -147,11 +149,16 @@ public class ExamActivity extends AppCompatActivity {
         rb1.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb1.getText().toString().substring(0,1))){
                 questionList.get(currentPos).setLearned(true);
+
                 editor.putInt(String.valueOf(currentPos),1).apply();
                 doneQuestion[currentPos] = 1;
                 isDone[currentPos]=true;
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 0;
             }
             else{
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 1;
                 doneQuestion[currentPos] = 2;
                 isDone[currentPos]=true;
             }
@@ -163,8 +170,12 @@ public class ExamActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),2).apply();
                 doneQuestion[currentPos] = 1;
                 isDone[currentPos]=true;
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 0;
             }
             else{
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 1;
                 doneQuestion[currentPos] = 2;
                 isDone[currentPos]=true;
             }
@@ -176,8 +187,12 @@ public class ExamActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),3).apply();
                 doneQuestion[currentPos] = 1;
                 isDone[currentPos]=true;
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 0;
             }
             else{
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 1;
                 doneQuestion[currentPos] = 2;
                 isDone[currentPos]=true;
             }
@@ -188,8 +203,12 @@ public class ExamActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),4).apply();
                 doneQuestion[currentPos] = 1;
                 isDone[currentPos]=true;
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 0;
             }
             else{
+                if(questionList.get(currentPos).isEssential()==true)
+                    essQuestion[currentPos] = 1;
                 doneQuestion[currentPos] = 2;
                 isDone[currentPos]=true;
             }

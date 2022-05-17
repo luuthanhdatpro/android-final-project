@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.androidfinal.database.DatabaseHelper;
 import com.example.androidfinal.fragment.BottomSheetFragment;
 import com.example.androidfinal.inteface.BottomSheetOnclickListener;
 import com.example.androidfinal.model.Question;
@@ -31,6 +32,7 @@ public class ReviewActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int questionAttemped = 1, currentPos;
+    DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,17 @@ public class ReviewActivity extends AppCompatActivity {
         editor.clear();
         editor.apply();
         function();
+        databaseHelper = new DatabaseHelper(this);
+        try {
+            databaseHelper.checkDB();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            databaseHelper.openDatabase();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
     private void init(){
