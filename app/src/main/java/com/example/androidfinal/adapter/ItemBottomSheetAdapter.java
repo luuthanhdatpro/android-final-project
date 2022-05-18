@@ -49,9 +49,9 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
         }
         if(question == null)
             return;
-        holder.tvId.setText("Câu"+question.getId()+"/"+questionList.size());
+        holder.tvId.setText("Câu "+question.getId()+"/"+questionList.size());
         if(question.isLearned()==true)
-            holder.tvId.setText("Câu"+question.getId()+"/"+questionList.size()+"|đã học");
+            holder.tvId.setText("Câu "+question.getId()+"/"+questionList.size()+"|đã học");
         holder.tvQuestion.setText(question.getTitle());
         if(question.isEssential() == true)
             holder.imageEssen.setVisibility(View.VISIBLE);
@@ -59,8 +59,6 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
             image = "@drawable/" + question.getImage();
             int imageResource = context.getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, context.getPackageName());
             holder.imageQues.setImageResource(imageResource);
-            Log.i("image1", image.substring(0,image.indexOf(".")));
-            Log.i("image", String.valueOf(imageResource));
         }
         holder.cardView.setOnClickListener(view -> bottomSheetOnclickListener.clickItem(question));
     }

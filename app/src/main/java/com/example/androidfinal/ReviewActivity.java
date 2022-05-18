@@ -83,13 +83,13 @@ public class ReviewActivity extends AppCompatActivity {
     private void function(){
         rb1.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb1.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Correct",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_LONG).show();
                 rb1.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),1).apply();
             }
             else{
-                Toast.makeText(ReviewActivity.this,"False",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb1.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -98,13 +98,13 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb2.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb2.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Correct",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_LONG).show();
                 rb2.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),2).apply();
             }
             else{
-                Toast.makeText(ReviewActivity.this,"False",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb2.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -113,13 +113,13 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb3.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb3.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Correct",Toast.LENGTH_LONG).show();
-                rb3.setBackgroundColor(Color.parseColor("#00FF19"));
+                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_LONG).show();
+                rb3.setBackgroundColor(Color.GREEN);
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),3).apply();
             }
             else{
-                Toast.makeText(ReviewActivity.this,"False",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb3.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -128,13 +128,13 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb4.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb4.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Correct",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_LONG).show();
                 rb4.setBackgroundColor(Color.GREEN);
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),4).apply();
             }
             else{
-                Toast.makeText(ReviewActivity.this,"False",Toast.LENGTH_LONG).show();
+                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb4.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -244,9 +244,9 @@ public class ReviewActivity extends AppCompatActivity {
             bSave.setBackgroundColor(Color.WHITE);
         }
         if(questionList.get(currentPos).isLearned()==true) {
-            questionNum.setText("Câu" + (currentPos + 1) + "/" + questionList.size() +" đã học");
+            questionNum.setText("Câu " + (currentPos + 1) + "/" + questionList.size() +": |đã học");
         }else {
-            questionNum.setText("Câu"+(currentPos+1)+"/"+questionList.size());
+            questionNum.setText("Câu "+(currentPos+1)+"/"+questionList.size()+":");
         }
 
         question.setText(questionList.get(currentPos).getTitle());
@@ -257,10 +257,10 @@ public class ReviewActivity extends AppCompatActivity {
         }else{
             question.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0,0,0);
         }
-        rb1.setText(questionList.get(currentPos).getOption1());
-        rb2.setText(questionList.get(currentPos).getOption2());
-        rb3.setText(questionList.get(currentPos).getOption3());
-        rb4.setText(questionList.get(currentPos).getOption4());
+        rb1.setText("1."+questionList.get(currentPos).getOption1());
+        rb2.setText("2."+questionList.get(currentPos).getOption2());
+        rb3.setText("3."+questionList.get(currentPos).getOption3());
+        rb4.setText("4."+questionList.get(currentPos).getOption4());
         if(questionList.get(currentPos).getOption3()==null)
             rb3.setVisibility(View.INVISIBLE);
         else
