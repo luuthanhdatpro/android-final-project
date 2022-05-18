@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Question implements Serializable {
     private int id;
+    private int tempID;
     private String title;
     private String image;
     private String type;
@@ -17,12 +18,34 @@ public class Question implements Serializable {
     private int rightAnswer;
     private boolean isLearned;
 
-    public boolean isLearned() {
-        return isLearned;
+    public Question(int id, String title, String image, String type, String description, boolean isEssential, String option1, String option2, String option3, String option4, int rightAnswer) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.type = type;
+        this.description = description;
+        this.isEssential = isEssential;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.rightAnswer = rightAnswer;
     }
 
-    public void setLearned(boolean learned) {
-        isLearned = learned;
+    public Question(int id, String title, String image, String type, String description, boolean isSaved, boolean isEssential, String option1, String option2, String option3, String option4, int rightAnswer, boolean isLearned) {
+        this.id = id;
+        this.title = title;
+        this.image = image;
+        this.type = type;
+        this.description = description;
+        this.isSaved = isSaved;
+        this.isEssential = isEssential;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.rightAnswer = rightAnswer;
+        this.isLearned = isLearned;
     }
 
     public Question(int id, String title, String image, String type, String description, boolean isSaved, boolean isEssential, String option1, String option2, String option3, String option4, int rightAnswer) {
@@ -154,4 +177,20 @@ public class Question implements Serializable {
     public void setRightAnswer(int rightAnswer) {
         this.rightAnswer = rightAnswer;
     }
+    public boolean isLearned() {
+        return isLearned;
+    }
+
+    public void setLearned(boolean learned) {
+        isLearned = learned;
+    }
+
+    public int getTempID() {
+        return tempID;
+    }
+
+    public void setTempID(int tempID) {
+        this.tempID = tempID;
+    }
+
 }

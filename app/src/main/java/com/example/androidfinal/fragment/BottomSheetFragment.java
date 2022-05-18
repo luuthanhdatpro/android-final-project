@@ -1,6 +1,7 @@
 package com.example.androidfinal.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,14 +24,15 @@ import java.util.ArrayList;
 public class BottomSheetFragment extends BottomSheetDialogFragment {
     private ArrayList<Question> questionList;
     private BottomSheetOnclickListener bottomSheetOnclickListener;
-
+    private Context context;
     public BottomSheetFragment(ArrayList<Question> questionList, BottomSheetOnclickListener bottomSheetOnclickListener) {
         this.questionList = questionList;
         this.bottomSheetOnclickListener = bottomSheetOnclickListener;
     }
 
-    public BottomSheetFragment(ArrayList<Question> questionList) {
+    public BottomSheetFragment(ArrayList<Question> questionList, Context context) {
         this.questionList = questionList;
+        this.context = context;
     }
 
     public ArrayList<Question> getQuestionList() {
@@ -66,7 +68,7 @@ public class BottomSheetFragment extends BottomSheetDialogFragment {
             public void clickItem(Question question) {
                 bottomSheetOnclickListener.clickItem(question);
             }
-        });
+        }, context);
         recyclerViewData.setAdapter(itemBottomSheetAdapter);
 
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);

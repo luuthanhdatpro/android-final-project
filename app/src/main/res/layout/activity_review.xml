@@ -170,7 +170,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.104" />
 
-    <androidx.core.widget.NestedScrollView
+    <ScrollView
         android:layout_width="403dp"
         android:layout_height="186dp"
         android:fillViewport="true"
@@ -181,11 +181,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <TextView
                 android:id="@+id/tvQuestion"
                 android:layout_width="378dp"
@@ -194,6 +189,5 @@
                 android:text="Câu hỏi"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

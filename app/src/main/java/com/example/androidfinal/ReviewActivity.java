@@ -38,17 +38,6 @@ public class ReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review);
         init();
-        getQuizQuestion(questionList);
-        for(int i = 0; i < questionList.size(); i++) {
-            questionList.get(i).setId(i+1);
-        }
-        currentPos = 0;
-        setDatatoView(currentPos);
-        sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
-        editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-        function();
         databaseHelper = new DatabaseHelper(this);
         try {
             databaseHelper.checkDB();
@@ -60,6 +49,19 @@ public class ReviewActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
+        questionList = databaseHelper.getQuestionByType("KNQTGT");
+        //getQuizQuestion(questionList);
+
+        for(int i = 0; i < questionList.size(); i++) {
+            questionList.get(i).setId(i+1);
+        }
+        currentPos = 0;
+        setDatatoView(currentPos);
+        sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        function();
 
     }
     private void init(){
@@ -226,7 +228,7 @@ public class ReviewActivity extends AppCompatActivity {
 
     }
     private void clickOpenBottomSheet() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList);
+        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList, this);
         bottomSheetFragment.setOnclickListener(question -> {
             setDatatoView(question.getId()-1);
             currentPos = question.getId();
@@ -269,21 +271,22 @@ public class ReviewActivity extends AppCompatActivity {
             rb4.setVisibility(View.VISIBLE);
     }
     private void getQuizQuestion(ArrayList<Question> questionList){
-        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
-        questionList.get(0).setEssential(true);
-        questionList.get(0).setOption3(null);
-        questionList.get(0).setOption4(null);
-        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
-        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
-        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.get(5).setEssential(true);
-        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-        questionList.add(new Question("Test11","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+
+//        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
+//        questionList.get(0).setEssential(true);
+//        questionList.get(0).setOption3(null);
+//        questionList.get(0).setOption4(null);
+//        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
+//        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
+//        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.get(5).setEssential(true);
+//        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
+//        questionList.add(new Question("Test11","1.Wrong","2.Wrong","3.Wrong","4.True",4));
 
     }
 }

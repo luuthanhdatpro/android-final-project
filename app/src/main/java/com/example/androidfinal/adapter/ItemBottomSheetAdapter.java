@@ -1,5 +1,7 @@
 package com.example.androidfinal.adapter;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +22,16 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
 
     private ArrayList<Question> questionList;
     private BottomSheetOnclickListener bottomSheetOnclickListener;
-
+    private Context context;
     public ItemBottomSheetAdapter(ArrayList<Question> questionList, BottomSheetOnclickListener bottomSheetOnclickListener) {
         this.questionList = questionList;
         this.bottomSheetOnclickListener = bottomSheetOnclickListener;
+    }
+
+    public ItemBottomSheetAdapter(ArrayList<Question> questionList, BottomSheetOnclickListener bottomSheetOnclickListener, Context context) {
+        this.questionList = questionList;
+        this.bottomSheetOnclickListener = bottomSheetOnclickListener;
+        this.context = context;
     }
 
     @NonNull
@@ -36,6 +44,9 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Question question = questionList.get(position);
+        String image;
+        if(question.getImage() != null) {
+        }
         if(question == null)
             return;
         holder.tvId.setText("Câu"+question.getId()+"/"+questionList.size());
@@ -44,8 +55,13 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
         holder.tvQuestion.setText(question.getTitle());
         if(question.isEssential() == true)
             holder.imageEssen.setVisibility(View.VISIBLE);
-        if (question.getImage() != null)
-            holder.imageQues.setVisibility(View.VISIBLE);
+        if (question.getImage() != null) {
+            image = "@drawable/" + question.getImage();
+            int imageResource = context.getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, context.getPackageName());
+            holder.imageQues.setImageResource(imageResource);
+            Log.i("image1", image.substring(0,image.indexOf(".")));
+            Log.i("image", String.valueOf(imageResource));
+        }
         holder.cardView.setOnClickListener(view -> bottomSheetOnclickListener.clickItem(question));
     }
 
