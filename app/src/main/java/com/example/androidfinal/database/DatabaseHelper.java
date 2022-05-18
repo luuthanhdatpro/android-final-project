@@ -1,5 +1,6 @@
 package com.example.androidfinal.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -53,9 +54,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else{
             copyDataBase();
         }
+        closeDatabase();
     }
     public void copyDataBase(){
-        this.getReadableDatabase();
+         this.getReadableDatabase();
 
         try {
             InputStream ios = mContext.getAssets().open(DATABASE_NAME);
@@ -73,7 +75,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         Log.i("CopyDB","Sucessfully");
-
+        closeDatabase();
     }
     public void closeDatabase(){
         if(mDatabase != null){
@@ -103,6 +105,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         closeDatabase();
         return qList;
+    }
+    public void updateLearned(int id, int value){
+        openDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isLearned", value);
+        try {
+            mDatabase.update("Questions",values,"_id = ?",  new String[]{String.valueOf(id)});
+        }catch (Exception ex){
+            Log.i("update","Something went wrong.");
+        }
+        closeDatabase();
+
+    }
+    public void updateSaved(int id, int value){
+        openDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isSaved", value);
+        try {
+            mDatabase.update("Questions",values,"_id = ?",  new String[]{String.valueOf(id)});
+        }catch (Exception ex){
+            Log.i("update","Something went wrong.");
+        }
+        closeDatabase();
+
     }
     public void openDatabase(){
         String filePath = mContext.getDatabasePath(DATABASE_NAME).getPath();

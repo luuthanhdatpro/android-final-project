@@ -44,16 +44,16 @@ public class ReviewActivity extends AppCompatActivity {
         }catch (Exception e){
             e.printStackTrace();
         }
-        try {
-            databaseHelper.openDatabase();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            databaseHelper.openDatabase();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
         questionList = databaseHelper.getQuestionByType("KNQTGT");
         //getQuizQuestion(questionList);
 
         for(int i = 0; i < questionList.size(); i++) {
-            questionList.get(i).setId(i+1);
+            questionList.get(i).setTempID(i+1);
         }
         currentPos = 0;
         setDatatoView(currentPos);
@@ -89,6 +89,7 @@ public class ReviewActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),1).apply();
             }
             else{
+                questionList.get(currentPos).setLearned(false);
                 Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb1.setBackgroundColor(Color.RED);
             }
@@ -104,6 +105,7 @@ public class ReviewActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),2).apply();
             }
             else{
+                questionList.get(currentPos).setLearned(false);
                 Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb2.setBackgroundColor(Color.RED);
             }
@@ -119,6 +121,7 @@ public class ReviewActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),3).apply();
             }
             else{
+                questionList.get(currentPos).setLearned(false);
                 Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb3.setBackgroundColor(Color.RED);
             }
@@ -134,6 +137,7 @@ public class ReviewActivity extends AppCompatActivity {
                 editor.putInt(String.valueOf(currentPos),4).apply();
             }
             else{
+                questionList.get(currentPos).setLearned(false);
                 Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_LONG).show();
                 rb4.setBackgroundColor(Color.RED);
             }
@@ -212,12 +216,29 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
         bBTM.setOnClickListener(view -> {
+            for(int i = 0; i < questionList.size(); i++){
+                if(questionList.get(i).isLearned()){
+                    databaseHelper.updateLearned(questionList.get(i).getId(),1);
+                }else{
+                    databaseHelper.updateLearned(questionList.get(i).getId(),0);
+                }
+                if(questionList.get(i).isSaved()){
+                    databaseHelper.updateSaved(questionList.get(i).getId(),1);
+                }else{
+                    databaseHelper.updateSaved(questionList.get(i).getId(),0);
+                }
+            }
             Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
             startActivity(intent);
         });
         bSave.setOnClickListener(view -> {
-            bSave.setBackgroundColor(Color.YELLOW);
-            questionList.get(currentPos).setSaved(true);
+            if(questionList.get(currentPos).isSaved()==true) {
+                bSave.setBackgroundColor(Color.WHITE);
+                questionList.get(currentPos).setSaved(false);
+            }else{
+                bSave.setBackgroundColor(Color.YELLOW);
+                questionList.get(currentPos).setSaved(true);
+            }
         });
         bBTS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,8 +251,8 @@ public class ReviewActivity extends AppCompatActivity {
     private void clickOpenBottomSheet() {
         BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList, this);
         bottomSheetFragment.setOnclickListener(question -> {
-            setDatatoView(question.getId()-1);
-            currentPos = question.getId();
+            setDatatoView(question.getTempID()-1);
+            currentPos = question.getTempID();
             bottomSheetFragment.dismiss();
         });
 
