@@ -142,6 +142,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_sign"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -155,7 +156,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/image"
+                    android:id="@+id/image_button_sign"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:scaleType="centerCrop"
@@ -175,6 +176,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cv_isSaved"
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -188,7 +190,7 @@
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/image"
+                    android:id="@+id/image_button_saved"
                     android:layout_width="45dp"
                     android:layout_height="60dp"
                     android:background="@color/white"
@@ -196,7 +198,7 @@
                     android:src="@drawable/mark" />
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_isSaved"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="6dp"
@@ -321,7 +323,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarDL"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -330,6 +332,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_DL_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
@@ -339,6 +342,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_knvqt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -382,7 +386,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarKN"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -391,15 +395,17 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_KN_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
                         android:layout_gravity="center_vertical"
                         android:text="100 câu hỏi"
-                        android:textSize="17dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_vhlx"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -442,7 +448,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarVH"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -451,6 +457,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_VH_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
@@ -460,6 +467,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_ktlx"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -502,7 +510,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarKT"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -511,6 +519,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_KT_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
@@ -521,6 +530,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_ctvsc"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -563,7 +573,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarCT"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -572,6 +582,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_CT_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
@@ -582,6 +593,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bbvdb"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -624,7 +636,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarBB"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -633,6 +645,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_BB_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"
@@ -642,6 +655,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_sahinh"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:cardCornerRadius="8dp"
@@ -685,7 +699,7 @@
                     </LinearLayout>
 
                     <ProgressBar
-                        android:id="@+id/progressBar"
+                        android:id="@+id/progressBarSH"
                         style="?android:attr/progressBarStyleHorizontal"
                         android:layout_width="390dp"
                         android:layout_height="0dp"
@@ -694,6 +708,7 @@
                         android:visibility="visible" />
 
                     <TextView
+                        android:id="@+id/tv_SH_count"
                         android:layout_width="150dp"
                         android:layout_height="20dp"
                         android:layout_marginLeft="20dp"

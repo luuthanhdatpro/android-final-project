@@ -10,12 +10,14 @@
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_exam.xml" value="0.25" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_exam_list.xml" value="0.2171875" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_exam_start.xml" value="0.264" />
-        <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_main.xml" value="0.136" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_main2.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_result.xml" value="0.152" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_result2.xml" value="0.16822916666666668" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_review.xml" value="0.16822916666666668" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_saved.xml" value="0.16944444444444445" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_setting.xml" value="0.16822916666666668" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_sign_detail.xml" value="0.16944444444444445" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_signal.xml" value="0.2" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_test_grid.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/activity_test_grid2.xml" value="0.25416666666666665" />
@@ -28,6 +30,7 @@
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/product_in_list_view.xml" value="0.1" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/question_in_result.xml" value="0.25416666666666665" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/score_bottom_sheet.xml" value="0.264" />
+        <entry key="..\:/AndroidFinal/app/src/main/res/layout/sign_item.xml" value="0.16875" />
         <entry key="..\:/AndroidFinal/app/src/main/res/layout/top_item.xml" value="0.264" />
         <entry key="..\:/AndroidFinal/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2595" />
       </map>

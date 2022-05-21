@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/button_back_sign"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:background="@color/white"
@@ -33,16 +34,109 @@
             />
 
     </LinearLayout>
-    <ScrollView
+
+    <HorizontalScrollView
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
+
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bienbaocam"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Biển báo cấm"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bbnguyhiem"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Biển báo nguy hiểm"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bbhieulenh"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Biển báo hiệu lệnh"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bbchidan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center"
+                    android:text="Biển báo chỉ dẫn"
+                    android:textColor="@color/black"
+                    android:textSize="25dp" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_bbphu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 app:cardElevation="15dp"
                 app:cardCornerRadius="0dp"
                 android:layout_marginTop="5dp"
@@ -50,19 +144,25 @@
                 android:layout_marginBottom="5dp"
                 android:layout_gravity="center">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Biển báo cấm"
-                        android:textSize="25dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:textColor="@color/black"
-                        android:gravity="center"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Biển báo phụ"
+                    android:textSize="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
             </androidx.cardview.widget.CardView>
-
         </LinearLayout>
-    </ScrollView>
+    </HorizontalScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycle_sign"
+        >
 
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

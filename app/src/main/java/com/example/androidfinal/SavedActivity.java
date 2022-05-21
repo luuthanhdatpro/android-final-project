@@ -15,20 +15,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidfinal.database.DatabaseHelper;
-import com.example.androidfinal.fragment.BottomSheetFragment;
-import com.example.androidfinal.inteface.BottomSheetOnclickListener;
 import com.example.androidfinal.model.Question;
 
 import java.util.ArrayList;
-import java.util.Random;
 
-public class ReviewActivity extends AppCompatActivity {
+public class SavedActivity extends AppCompatActivity {
     private TextView question, questionNum;
     private RadioButton rb1, rb2, rb3, rb4;
     private ArrayList<Question> questionList;
-    private ImageButton bNext,bBack, bBTM, bSave, bBTS;
+    private ImageButton bNext,bBack, bBTM, bSave;
     private RadioGroup rg;
-    Random random;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     int questionAttemped = 1, currentPos;
@@ -36,50 +32,10 @@ public class ReviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review);
+        setContentView(R.layout.activity_saved);
         init();
         databaseHelper = new DatabaseHelper(this);
-        try {
-            databaseHelper.checkDB();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-//        try {
-//            databaseHelper.openDatabase();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-        Intent intent = this.getIntent();
-        switch (intent.getStringExtra("type")){
-            case "vanhoa":
-                questionList = databaseHelper.getQuestionByType("VH");
-                break;
-            case "diemliet":
-                questionList = databaseHelper.getQuestionByType("DL");
-                break;
-            case "sahinh":
-                questionList = databaseHelper.getQuestionByType("SH");
-                break;
-            case "cautao":
-                questionList = databaseHelper.getQuestionByType("CT");
-                break;
-            case "kythuat":
-                questionList = databaseHelper.getQuestionByType("KT");
-                break;
-            case "khainiem":
-                questionList = databaseHelper.getQuestionByType("KNQTGT");
-                break;
-            case "bienbao":
-                questionList = databaseHelper.getQuestionByType("BB");
-                break;
-            default:
-                questionList = databaseHelper.getQuestionByType("KNQTGT");
-                break;
-
-        }
-
-        //getQuizQuestion(questionList);
-
+        questionList = databaseHelper.getSavedQuestion();
         for(int i = 0; i < questionList.size(); i++) {
             questionList.get(i).setTempID(i+1);
         }
@@ -90,35 +46,32 @@ public class ReviewActivity extends AppCompatActivity {
         editor.clear();
         editor.apply();
         function();
-
     }
     private void init(){
-        question = findViewById(R.id.tvQuestion);
-        questionNum = findViewById(R.id.tvQuestionID);
-        rb1 = findViewById(R.id.option1);
-        rb2 = findViewById(R.id.option2);
-        rb3 = findViewById(R.id.option3);
-        rb4 = findViewById(R.id.option4);
-        rg = findViewById(R.id.radioGroup);
-        bNext = findViewById(R.id.button_next);
-        bBack = findViewById(R.id.button_back);
-        bBTM =  findViewById(R.id.button_btm);
-        bSave = findViewById(R.id.button_save);
-        bBTS = findViewById(R.id.button_open_bts);
+        question = findViewById(R.id.tvQuestion_saved);
+        questionNum = findViewById(R.id.tvQuestionID_saved);
+        rb1 = findViewById(R.id.option1_saved);
+        rb2 = findViewById(R.id.option2_saved);
+        rb3 = findViewById(R.id.option3_saved);
+        rb4 = findViewById(R.id.option4_saved);
+        rg = findViewById(R.id.radioGroup_saved);
+        bNext = findViewById(R.id.button_next_saved);
+        bBack = findViewById(R.id.button_back_saved);
+        bBTM =  findViewById(R.id.button_btm_saved);
+        bSave = findViewById(R.id.button_save_saved);
         questionList = new ArrayList<>();
-        random = new Random();
     }
     private void function(){
         rb1.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb1.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
                 rb1.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),1).apply();
             }
             else{
                 questionList.get(currentPos).setLearned(false);
-                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Sai",Toast.LENGTH_SHORT).show();
                 rb1.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -127,14 +80,14 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb2.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb2.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
                 rb2.setBackgroundColor(Color.parseColor("#00FF19"));
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),2).apply();
             }
             else{
                 questionList.get(currentPos).setLearned(false);
-                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Sai",Toast.LENGTH_SHORT).show();
                 rb2.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -143,14 +96,14 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb3.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb3.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
                 rb3.setBackgroundColor(Color.GREEN);
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),3).apply();
             }
             else{
                 questionList.get(currentPos).setLearned(false);
-                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Sai",Toast.LENGTH_SHORT).show();
                 rb3.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -159,14 +112,14 @@ public class ReviewActivity extends AppCompatActivity {
         });
         rb4.setOnClickListener(view -> {
             if(questionList.get(currentPos).getRightAnswer()==Integer.parseInt(rb4.getText().toString().substring(0,1))){
-                Toast.makeText(ReviewActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Đúng",Toast.LENGTH_SHORT).show();
                 rb4.setBackgroundColor(Color.GREEN);
                 questionList.get(currentPos).setLearned(true);
                 editor.putInt(String.valueOf(currentPos),4).apply();
             }
             else{
                 questionList.get(currentPos).setLearned(false);
-                Toast.makeText(ReviewActivity.this,"Sai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(SavedActivity.this,"Sai",Toast.LENGTH_SHORT).show();
                 rb4.setBackgroundColor(Color.RED);
             }
             for(int i = 0; i < rg.getChildCount(); i++){
@@ -256,7 +209,7 @@ public class ReviewActivity extends AppCompatActivity {
                     databaseHelper.updateSaved(questionList.get(i).getId(),0);
                 }
             }
-            Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
+            Intent intent = new Intent(SavedActivity.this, MainActivity.class);
             startActivity(intent);
         });
         bSave.setOnClickListener(view -> {
@@ -268,23 +221,6 @@ public class ReviewActivity extends AppCompatActivity {
                 questionList.get(currentPos).setSaved(true);
             }
         });
-        bBTS.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                clickOpenBottomSheet();
-            }
-        });
-
-    }
-    private void clickOpenBottomSheet() {
-        BottomSheetFragment bottomSheetFragment = new BottomSheetFragment(questionList, this);
-        bottomSheetFragment.setOnclickListener(question -> {
-            setDatatoView(question.getTempID()-1);
-            currentPos = question.getTempID();
-            bottomSheetFragment.dismiss();
-        });
-
-        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
     private void setDatatoView(int currentPos){
         if(questionList.get(currentPos).isSaved()==true){
@@ -318,24 +254,5 @@ public class ReviewActivity extends AppCompatActivity {
             rb4.setVisibility(View.INVISIBLE);
         else
             rb4.setVisibility(View.VISIBLE);
-    }
-    private void getQuizQuestion(ArrayList<Question> questionList){
-
-//        questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
-//        questionList.get(0).setEssential(true);
-//        questionList.get(0).setOption3(null);
-//        questionList.get(0).setOption4(null);
-//        questionList.add(new Question("Test2","1.Wrong","2.True","3.Wrong","4.True",2));
-//        questionList.add(new Question("Test3","1.Wrong","2.Wrong","3.True","4.True",3));
-//        questionList.add(new Question("Test4","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test5","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test6","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.get(5).setEssential(true);
-//        questionList.add(new Question("Test7","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test8","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test9","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test10","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-//        questionList.add(new Question("Test11","1.Wrong","2.Wrong","3.Wrong","4.True",4));
-
     }
 }

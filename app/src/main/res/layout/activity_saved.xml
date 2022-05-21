@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReviewActivity">
+    tools:context=".SavedActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -23,28 +23,28 @@
         app:layout_constraintVertical_bias="0.0">
 
         <ImageButton
-            android:id="@+id/button_btm"
+            android:id="@+id/button_btm_saved"
             android:layout_width="50dp"
             android:layout_height="60dp"
             android:background="@color/white"
             android:src="@drawable/smaller" />
 
         <TextView
-            android:id="@+id/tvQuestionType"
+            android:id="@+id/tvQuestionType_saved"
             android:layout_width="340dp"
             android:layout_height="60dp"
             android:layout_marginLeft="0dp"
-            android:text="Câu hỏi dạng"
+            android:text="Câu hỏi đã lưu"
             android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="30dp"
-             />
+            />
 
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/tvQuestionID"
+        android:id="@+id/tvQuestionID_saved"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -55,9 +55,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.133" />
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"></androidx.core.widget.NestedScrollView>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -80,34 +78,34 @@
                 android:orientation="vertical">
 
                 <RadioGroup
-                    android:id="@+id/radioGroup"
+                    android:id="@+id/radioGroup_saved"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal">
 
                     <RadioButton
-                        android:id="@+id/option1"
+                        android:id="@+id/option1_saved"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
                         android:text="Dumb text" />
 
                     <RadioButton
-                        android:id="@+id/option2"
+                        android:id="@+id/option2_saved"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
                         android:text="Dumb text" />
 
                     <RadioButton
-                        android:id="@+id/option3"
+                        android:id="@+id/option3_saved"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
                         android:text="Dumb text" />
 
                     <RadioButton
-                        android:id="@+id/option4"
+                        android:id="@+id/option4_saved"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:checked="false"
@@ -118,7 +116,7 @@
     </androidx.cardview.widget.CardView>
 
     <ImageButton
-        android:id="@+id/button_back"
+        android:id="@+id/button_back_saved"
         android:layout_width="40dp"
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
@@ -131,7 +129,7 @@
         app:layout_constraintVertical_bias="0.989" />
 
     <ImageButton
-        android:id="@+id/button_next"
+        android:id="@+id/button_next_saved"
         android:layout_width="40dp"
         android:layout_height="50dp"
         android:layout_marginStart="360dp"
@@ -143,21 +141,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.989" />
 
-    <ImageButton
-        android:id="@+id/button_open_bts"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginStart="172dp"
-        android:background="@color/white"
-        android:src="@drawable/double_up"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.989" />
 
     <ImageButton
-        android:id="@+id/button_save"
+        android:id="@+id/button_save_saved"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:scaleType="fitXY"
@@ -181,13 +167,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.251">
 
-            <TextView
-                android:id="@+id/tvQuestion"
-                android:layout_width="378dp"
-                android:layout_height="184dp"
-                android:layout_marginStart="8dp"
-                android:text="Câu hỏi"
-                android:textColor="@color/black"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/tvQuestion_saved"
+            android:layout_width="378dp"
+            android:layout_height="184dp"
+            android:layout_marginStart="8dp"
+            android:text="Câu hỏi"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

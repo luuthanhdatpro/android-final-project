@@ -45,8 +45,7 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         Question question = questionList.get(position);
         String image;
-        if(question.getImage() != null) {
-        }
+
         if(question == null)
             return;
         holder.tvId.setText("Câu "+question.getId()+"/"+questionList.size());

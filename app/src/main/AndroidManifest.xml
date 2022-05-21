@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".SignDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SavedActivity"
+            android:exported="false" />
+        <activity
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
