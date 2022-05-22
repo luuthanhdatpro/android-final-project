@@ -54,32 +54,44 @@
             android:textStyle="bold" />
     </LinearLayout>
 
+
     <TextView
         android:id="@+id/tv_question_id_exam"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="4dp"
         android:text="Câu ?/35"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276" />
+        app:layout_constraintVertical_bias="0.266" />
 
-    <TextView
-        android:id="@+id/tv_question_exam"
-        android:layout_width="378dp"
-        android:layout_height="184dp"
-        android:layout_marginStart="16dp"
-        android:text="Câu hỏi"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+    <ScrollView
+        android:layout_width="396dp"
+        android:layout_height="222dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.414" />
+        app:layout_constraintVertical_bias="0.407">
+
+        <TextView
+            android:id="@+id/tv_question_exam"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:text="Câu hỏi"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.414" />
+    </ScrollView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"

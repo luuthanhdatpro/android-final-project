@@ -1,5 +1,6 @@
 package com.example.androidfinal.adapter;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 public class ExamResultAdapter extends RecyclerView.Adapter<ExamResultAdapter.ExamResultViewHolder> {
     private ArrayList<Question> questionList;
     private ExamResultOnClickListener examResultOnClickListener;
+    private Context context;
     private String name;
     private int[] doneQues;
     public ExamResultAdapter(ArrayList<Question> questionList, ExamResultOnClickListener examResultOnClickListener) {
@@ -28,10 +30,11 @@ public class ExamResultAdapter extends RecyclerView.Adapter<ExamResultAdapter.Ex
         this.examResultOnClickListener = examResultOnClickListener;
     }
 
-    public ExamResultAdapter(ArrayList<Question> questionList, ExamResultOnClickListener examResultOnClickListener, int[] doneQues) {
+    public ExamResultAdapter(ArrayList<Question> questionList, ExamResultOnClickListener examResultOnClickListener, int[] doneQues, Context context) {
         this.questionList = questionList;
         this.examResultOnClickListener = examResultOnClickListener;
         this.doneQues = doneQues;
+        this.context = context;
     }
 
     public void setData(ArrayList<Question> list){
@@ -53,10 +56,14 @@ public class ExamResultAdapter extends RecyclerView.Adapter<ExamResultAdapter.Ex
     @Override
     public void onBindViewHolder(@NonNull ExamResultViewHolder holder, int position) {
         Question question = questionList.get(position);
+        String image;
         if(question == null)
             return;
         holder.tvQuestion.setText(question.getTitle());
-        holder.tvQuestionID.setText("Câu "+String.valueOf(question.getId())+"|35");
+        if(questionList.size()==35)
+            holder.tvQuestionID.setText("Câu "+(position+1)+"|35");
+        else
+            holder.tvQuestionID.setText("Câu "+(position+1)+"|30");
         if(doneQues[position]==0)
             holder.imageType.setBackgroundResource(R.drawable.warning);
         if(doneQues[position]==1)
@@ -66,8 +73,12 @@ public class ExamResultAdapter extends RecyclerView.Adapter<ExamResultAdapter.Ex
         Log.i("pos", String.valueOf(doneQues[position]));
         if(question.isEssential()==true)
             holder.imageQuestionEss.setVisibility(View.VISIBLE);
-        if(question.getImage()!=null)
+        if(question.getImage()!=null) {
+            image = "@drawable/" + question.getImage();
+            int imageResource = context.getResources().getIdentifier(image.substring(0,image.indexOf(".")), null, context.getPackageName());
+            holder.imageQuestion.setImageResource(imageResource);
             holder.imageQuestion.setVisibility(View.VISIBLE);
+        }
         holder.cardViewResult.setOnClickListener(view ->  examResultOnClickListener.clickItem(question));
     }
 

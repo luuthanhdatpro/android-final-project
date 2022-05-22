@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,7 @@ public class ResultActivity extends AppCompatActivity {
     private int countRight, countWrong, countNot, countEss;
     private RecyclerView recyclerView;
     private ExamResultAdapter examResultAdapter;
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +56,7 @@ public class ResultActivity extends AppCompatActivity {
         countEss = 0;
         countWrong = 0;
         countNot = 0;
-
+        sharedPreferences = getSharedPreferences("type",MODE_PRIVATE);
     }
     private void resultProcess(){
         for(int i = 0; i < doneQuestion.length; i++){
@@ -78,18 +80,28 @@ public class ResultActivity extends AppCompatActivity {
         Log.i("Nuull or not", String.valueOf(questionList.size()));
         examResultAdapter = new ExamResultAdapter(questionList, question -> {
 
-        },doneQuestion);
+        },doneQuestion,this);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-
+        String type = sharedPreferences.getString("type",null);
         examResultAdapter.setData(questionList);
         recyclerView.setAdapter(examResultAdapter);
-        if(countRight < 32|| countEss>0){
-            textViewResult.setText("Bạn đã thi trượt");
+        if (type.equals("B2")) {
+            if (countRight < 32 || countEss > 0) {
+                textViewResult.setText("Bạn đã thi trượt");
+            } else {
+                textViewResult.setText("Bạn đã thi đỗ");
+                textViewResult.setBackgroundColor(R.color.green);
+            }
         }else{
-            textViewResult.setText("Bạn đã thi đỗ");
-            textViewResult.setBackgroundColor(R.color.green);
+            if (countRight < 27 || countEss > 0) {
+                textViewResult.setText("Bạn đã thi trượt");
+            } else {
+                textViewResult.setText("Bạn đã thi đỗ");
+                textViewResult.setBackgroundColor(R.color.green);
+            }
         }
+
     }
     private void function(){
         buttonExitExam.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +128,13 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 examResultAdapter.setData(notAns,doneQuestion);
+            }
+        });
+        buttonRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ResultActivity.this, ExamStartActivity.class);
+                startActivity(intent);
             }
         });
     }

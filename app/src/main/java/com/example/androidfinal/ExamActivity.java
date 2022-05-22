@@ -23,10 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.androidfinal.adapter.ExamGridViewAdapter;
+import com.example.androidfinal.database.DatabaseHelper;
 import com.example.androidfinal.model.Question;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class ExamActivity extends AppCompatActivity {
@@ -34,17 +36,20 @@ public class ExamActivity extends AppCompatActivity {
     private ImageButton buttonExit, buttonNext, buttonBack;
     private RadioButton rb1, rb2, rb3, rb4;
     private Button buttonSubmit;
-    private ArrayList<Question> questionList;
+    private ArrayList<Question> questionList, vhList, shList, ctList, ktList, knList, bbList, nvList, dlList;
     private RadioGroup rg;
     private ExamGridViewAdapter gridViewAdapter;
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences, spType;
     SharedPreferences.Editor editor;
     private TextView textViewTimer, textViewQuestionNum, textViewQuestion;
     private CountDownTimer countDownTimer;
+    private DatabaseHelper databaseHelper;
     private int currentPos;
     private int[] index={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+    private int[] index1={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30};
+
     private boolean[] isDone = new boolean[35];
-    final long duration = TimeUnit.MINUTES.toMillis(22);
+    private long duration = TimeUnit.MINUTES.toMillis(22);
     private int[] doneQuestion= new int[35];
     private int[] essQuestion = new int[35];
     @Override
@@ -76,7 +81,43 @@ public class ExamActivity extends AppCompatActivity {
         editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        getQuizQuestion(questionList);
+        spType = getSharedPreferences("type",MODE_PRIVATE);
+        databaseHelper = new DatabaseHelper(this);
+        vhList = databaseHelper.getQuestionByType("VH");
+        shList = databaseHelper.getQuestionByType("SH");
+        ctList = databaseHelper.getQuestionByType("CT");
+        ktList = databaseHelper.getQuestionByType("KT");
+        knList = databaseHelper.getQuestionByType("KN");
+        bbList = databaseHelper.getQuestionByType("BB");
+        nvList = databaseHelper.getQuestionByType("NV");
+        dlList = databaseHelper.getEssQuestion();
+        if(spType.getString("type",null).equals("B1")){
+            getRandomQuestion(vhList,1);
+            getRandomQuestion(shList,9);
+            getRandomQuestion(ctList,1);
+            getRandomQuestion(bbList,9);
+            getRandomQuestion(knList,8);
+            getRandomQuestion(ktList,1);
+            getRandomQuestion(dlList,1);
+            duration = TimeUnit.MINUTES.toMillis(20);
+
+            isDone = new boolean[30];
+            doneQuestion= new int[30];
+            essQuestion = new int[30];
+            gridViewAdapter = new ExamGridViewAdapter(this,index1,isDone);
+            gridView.setAdapter(gridViewAdapter);
+        }else{
+            getRandomQuestion(vhList,1);
+            getRandomQuestion(shList,10);
+            getRandomQuestion(ctList,1);
+            getRandomQuestion(bbList,10);
+            getRandomQuestion(knList,9);
+            getRandomQuestion(ktList,2);
+            getRandomQuestion(dlList,1);
+            getRandomQuestion(nvList,1);
+        }
+        //getQuizQuestion(questionList);
+        setArrTempID(questionList);
         setDatatoView(currentPos);
 
         Log.i("child count", String.valueOf(gridView.getChildCount()));
@@ -335,7 +376,16 @@ public class ExamActivity extends AppCompatActivity {
         else
             rb4.setVisibility(View.VISIBLE);
     }
-
+    private void setArrTempID(ArrayList<Question> list){
+        for (int i = 0; i < list.size(); i++)
+            list.get(i).setTempID(i+1);
+    }
+    private void getRandomQuestion(ArrayList<Question> list, int quantity){
+        Random random = new Random();
+        for (int i = 0; i < quantity; i++){
+            questionList.add(list.get(random.nextInt(list.size())));
+        }
+    }
     private void getQuizQuestion(ArrayList<Question> questionList){
         questionList.add(new Question("Test1","1.Trueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee ","2.Wrong","3.Wrong","4.True",1));
         questionList.get(0).setEssential(true);
