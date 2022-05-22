@@ -48,9 +48,9 @@ public class ItemBottomSheetAdapter extends  RecyclerView.Adapter<ItemBottomShee
 
         if(question == null)
             return;
-        holder.tvId.setText("Câu "+question.getId()+"/"+questionList.size());
+        holder.tvId.setText("Câu "+question.getTempID()+"/"+questionList.size());
         if(question.isLearned()==true)
-            holder.tvId.setText("Câu "+question.getId()+"/"+questionList.size()+"|đã học");
+            holder.tvId.setText("Câu "+question.getTempID()+"/"+questionList.size()+"|đã học");
         holder.tvQuestion.setText(question.getTitle());
         if(question.isEssential() == true)
             holder.imageEssen.setVisibility(View.VISIBLE);

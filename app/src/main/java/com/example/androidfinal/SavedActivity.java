@@ -40,7 +40,15 @@ public class SavedActivity extends AppCompatActivity {
             questionList.get(i).setTempID(i+1);
         }
         currentPos = 0;
-        setDatatoView(currentPos);
+        if (questionList.size() != 0)
+            setDatatoView(currentPos);
+        else{
+            bNext.setVisibility(View.INVISIBLE);
+            bBack.setVisibility(View.INVISIBLE);
+            bSave.setVisibility(View.INVISIBLE);
+            rg.setVisibility(View.INVISIBLE);
+        }
+
         sharedPreferences = getSharedPreferences("pref", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         editor.clear();

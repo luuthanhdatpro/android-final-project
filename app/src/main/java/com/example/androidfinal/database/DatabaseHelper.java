@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
         }
         if (sqLiteDatabase!= null){
-            Toast.makeText(mContext, "Already Exist", Toast.LENGTH_SHORT).show();
+            Log.i("db","OK");
         }else{
             copyDataBase();
         }
@@ -248,6 +248,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("isLearned", value);
         try {
             mDatabase.update("Questions",values,"_id = ?",  new String[]{String.valueOf(id)});
+        }catch (Exception ex){
+            Log.i("update","Something went wrong.");
+        }
+        closeDatabase();
+
+    }
+    public void deleteAll(){
+        openDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isLearned", 0);
+        values.put("isSaved", 0);
+        try {
+            mDatabase.update("Questions",values,null,null);
         }catch (Exception ex){
             Log.i("update","Something went wrong.");
         }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,11 +16,13 @@ import android.widget.TextView;
 import com.example.androidfinal.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
-    CardView cvDiemLiet,cvTest, cvKhaiNiem, cvVanHoa, cvKyThuat, cvCauTao, cvBienBao, cvSaHinh, cvIsSaved, cvSign, cvNghiepVu;
-    TextView tvisSaved, tvDLcount, tvBBcount, tvKNcount, tvVHcount, tvKTcount, tvCTcount, tvSHcount, tvNVcount;
+    CardView cvDiemLiet,cvTest, cvKhaiNiem, cvVanHoa, cvKyThuat, cvCauTao, cvBienBao, cvSaHinh, cvIsSaved, cvSign, cvNghiepVu, cvSetting;
+    TextView tvisSaved, tvDLcount, tvBBcount, tvKNcount, tvVHcount, tvKTcount, tvCTcount, tvSHcount, tvNVcount, tvType;
     ProgressBar progressBarKN, progressBarDL, progressBarBB, progressBarVH, progressBarKT, progressBarCT, progressBarSH, progressBarNV;
-    ImageButton buttonTest, buttonSaved, buttonSign;
+    ImageButton buttonTest, buttonSaved, buttonSign, buttonSetting;
     DatabaseHelper databaseHelper;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         tvCTcount = findViewById(R.id.tv_CT_count);
         tvSHcount = findViewById(R.id.tv_SH_count);
         tvNVcount = findViewById(R.id.tv_NV_count);
+        tvType = findViewById(R.id.tv_type);
         progressBarKN = findViewById(R.id.progressBarKN);
         progressBarBB = findViewById(R.id.progressBarBB);
         progressBarVH = findViewById(R.id.progressBarVH);
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         cvIsSaved = findViewById(R.id.cv_isSaved);
         cvSign =findViewById(R.id.cv_sign);
         cvTest = findViewById(R.id.cv_test);
+        cvSetting = findViewById(R.id.cv_setting);
         buttonTest = findViewById(R.id.image_button_test);
         buttonSaved = findViewById(R.id.image_button_saved);
         buttonSign = findViewById(R.id.image_button_sign);
@@ -90,6 +95,16 @@ public class MainActivity extends AppCompatActivity {
         tvKTcount.setText("Đã học " + databaseHelper.countDoneQuestion("KT") +"/"+databaseHelper.countQuestion("KT"));
         tvVHcount.setText("Đã học " + databaseHelper.countDoneQuestion("VH") +"/"+databaseHelper.countQuestion("VH"));
         tvNVcount.setText("Đã học " + databaseHelper.countDoneQuestion("NV") +"/"+databaseHelper.countQuestion("NV"));
+        sharedPreferences = getSharedPreferences("type",MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+        String type = sharedPreferences.getString("type","B1");
+        if(type.equals("B1")){
+            cvNghiepVu.setVisibility(View.INVISIBLE);
+            tvType.setText("Loại bằng: B1");
+        }else{
+            cvNghiepVu.setVisibility(View.VISIBLE);
+            tvType.setText("Loại bằng: B2");
+        }
     }
     private void function(){
         cvDiemLiet.setOnClickListener(view -> {
@@ -148,6 +163,9 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, SignalActivity.class);
             startActivity(intent);
         });
-
+        cvSetting.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
+        });
     }
 }

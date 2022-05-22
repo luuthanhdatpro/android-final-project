@@ -7,6 +7,7 @@
     tools:context=".ExamStartActivity">
 
     <ImageButton
+        android:id="@+id/button_exit_start"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
@@ -32,6 +33,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_exam_start_type"
                 android:layout_width="250dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
@@ -41,14 +43,16 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textAlignment="center"/>
+
             <TextView
+                android:id="@+id/tv_exam_start"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="30dp"
                 android:text="Tổng số câu: 35\nThời gian làm bài: 22 phút\nSố câu đúng tối thiểu: 32/35
                 \nCâu hỏi điểm liệt: Sai một câu bất kỳ trong nhóm câu liệt, học viên sẽ trượt bài thi."
                 android:textColor="@color/black"
-                android:textSize="19dp"/>
+                android:textSize="19dp" />
             <Button
                 android:id="@+id/button_start_exam"
                 android:layout_width="260dp"
