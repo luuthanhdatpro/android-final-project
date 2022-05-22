@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.androidfinal.adapter.ExamListAdapter;
 import com.example.androidfinal.adapter.SignListAdapter;
@@ -23,9 +25,10 @@ import java.util.ArrayList;
 
 public class SignalActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private TextView tvBBCam, tvBBNguyHiem, tvBBHieuLenh, tvBBChiDan, tvBBPhu;
     private SignListAdapter signListAdapter;
     private ImageButton buttonBack;
-    private CardView cvBBCam, cvBBNguyHiem, cvBBHieuLenh, cvBBChiDan, cvBBPhu;
+    private Button cvBBCam, cvBBNguyHiem, cvBBHieuLenh, cvBBChiDan, cvBBPhu;
     private DatabaseHelper databaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,12 +45,17 @@ public class SignalActivity extends AppCompatActivity {
         cvBBHieuLenh = findViewById(R.id.cv_bbhieulenh);
         cvBBChiDan = findViewById(R.id.cv_bbchidan);
         cvBBPhu = findViewById(R.id.cv_bbphu);
+//        tvBBCam = findViewById(R.id.tv_bienbaocam);
+//        tvBBNguyHiem = findViewById(R.id.tv_bbnguyhiem);
+//        tvBBHieuLenh = findViewById(R.id.tv_bbhieulenh);
+//        tvBBChiDan = findViewById(R.id.tv_bbchidan);
+//        tvBBPhu = findViewById(R.id.tv_bbphu);
         recyclerView = findViewById(R.id.recycle_sign);
         buttonBack.setOnClickListener(view -> {
             Intent intent = new Intent(SignalActivity.this, MainActivity.class);
             startActivity(intent);
         });
-        signListAdapter = new SignListAdapter(getSignList(), new SignListOnClickListener() {
+        signListAdapter = new SignListAdapter(databaseHelper.getSignByType("cam"), new SignListOnClickListener() {
             @Override
             public void clickItem(Sign sign) {
                 Intent intent = new Intent(SignalActivity.this, SignDetailActivity.class);
@@ -62,16 +70,18 @@ public class SignalActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
-        signListAdapter.setData(getSignList());
+        ArrayList<Sign> signs =databaseHelper.getSignByType("cam");
+        Log.i("size", String.valueOf(signs.size()));
+        signListAdapter.setData(databaseHelper.getSignByType("cam"));
         recyclerView.setAdapter(signListAdapter);
 
     }
     private void function(){
         cvBBCam.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("cam")));
-        cvBBCam.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("nguyhiem")));
-        cvBBCam.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("hieulenh")));
-        cvBBCam.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("chidan")));
-        cvBBCam.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("phu")));
+        cvBBNguyHiem.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("nguyhiem")));
+        cvBBHieuLenh.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("hieulenh")));
+        cvBBChiDan.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("chidan")));
+        cvBBPhu.setOnClickListener(view -> signListAdapter.setData(databaseHelper.getSignByType("phu")));
     }
     private ArrayList<Sign> getSignList(){
         ArrayList<Sign> signs = new ArrayList<>();

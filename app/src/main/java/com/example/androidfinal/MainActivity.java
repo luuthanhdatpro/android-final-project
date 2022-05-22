@@ -15,9 +15,9 @@ import android.widget.TextView;
 import com.example.androidfinal.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
-    CardView cvDiemLiet,cvTest, cvKhaiNiem, cvVanHoa, cvKyThuat, cvCauTao, cvBienBao, cvSaHinh, cvIsSaved, cvSign;
-    TextView tvisSaved, tvDLcount, tvBBcount, tvKNcount, tvVHcount, tvKTcount, tvCTcount, tvSHcount;
-    ProgressBar progressBarKN, progressBarDL, progressBarBB, progressBarVH, progressBarKT, progressBarCT, progressBarSH;
+    CardView cvDiemLiet,cvTest, cvKhaiNiem, cvVanHoa, cvKyThuat, cvCauTao, cvBienBao, cvSaHinh, cvIsSaved, cvSign, cvNghiepVu;
+    TextView tvisSaved, tvDLcount, tvBBcount, tvKNcount, tvVHcount, tvKTcount, tvCTcount, tvSHcount, tvNVcount;
+    ProgressBar progressBarKN, progressBarDL, progressBarBB, progressBarVH, progressBarKT, progressBarCT, progressBarSH, progressBarNV;
     ImageButton buttonTest, buttonSaved, buttonSign;
     DatabaseHelper databaseHelper;
     @Override
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         tvKTcount = findViewById(R.id.tv_KT_count);
         tvCTcount = findViewById(R.id.tv_CT_count);
         tvSHcount = findViewById(R.id.tv_SH_count);
+        tvNVcount = findViewById(R.id.tv_NV_count);
         progressBarKN = findViewById(R.id.progressBarKN);
         progressBarBB = findViewById(R.id.progressBarBB);
         progressBarVH = findViewById(R.id.progressBarVH);
@@ -42,7 +43,9 @@ public class MainActivity extends AppCompatActivity {
         progressBarCT = findViewById(R.id.progressBarCT);
         progressBarSH = findViewById(R.id.progressBarSH);
         progressBarDL = findViewById(R.id.progressBarDL);
+        progressBarNV = findViewById(R.id.progressBarNV);
         tvisSaved = findViewById(R.id.tv_isSaved);
+        cvNghiepVu = findViewById(R.id.cv_nghiepvu);
         cvDiemLiet =findViewById(R.id.cv_diemliet);
         cvBienBao = findViewById(R.id.cv_bbvdb);
         cvKhaiNiem = findViewById(R.id.cv_knvqt);
@@ -57,25 +60,36 @@ public class MainActivity extends AppCompatActivity {
         buttonSaved = findViewById(R.id.image_button_saved);
         buttonSign = findViewById(R.id.image_button_sign);
         databaseHelper = new DatabaseHelper(this);
-        int maxKN = databaseHelper.countQuestion("KNQTGT");
-        int progressKN = databaseHelper.countDoneQuestion("KNQTGT");
+        int maxKN = databaseHelper.countQuestion("KN");
+        int progressKN = databaseHelper.countDoneQuestion("KN");
         float KN = (float) progressKN/maxKN;
         progressBarKN.setProgress(Math.round(KN*100));
-        progressBarKN.setMax(maxKN);
+        progressBarKN.setMax(100);
         progressBarBB.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("BB")/ databaseHelper.countQuestion("BB"))));
-        progressBarBB.setMax(databaseHelper.countQuestion("BB"));
-        progressBarDL.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("DL")/ databaseHelper.countQuestion("DL"))));
-        progressBarDL.setMax(databaseHelper.countQuestion("DL"));
+        progressBarBB.setMax(100);
+        progressBarDL.setProgress(Math.round(100*((float)databaseHelper.countDoneEssQuestion()/ databaseHelper.countEssQuestion())));
+        progressBarDL.setMax(100);
+        progressBarSH.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("SH")/ databaseHelper.countQuestion("SH"))));
+        progressBarSH.setMax(100);
+        progressBarCT.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("CT")/ databaseHelper.countQuestion("CT"))));
+        Log.i("prog",String.valueOf(Math.round(100*((float)databaseHelper.countDoneQuestion("CT")/ databaseHelper.countQuestion("CT")))));
+        progressBarCT.setMax(100);
+        progressBarVH.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("VH")/ databaseHelper.countQuestion("VH"))));
+        progressBarVH.setMax(100);
+        progressBarKT.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("KT")/ databaseHelper.countQuestion("KT"))));
+        progressBarKT.setMax(100);
+        progressBarNV.setProgress(Math.round(100*((float)databaseHelper.countDoneQuestion("NV")/ databaseHelper.countQuestion("NV"))));
+        progressBarNV.setMax(100);
 
         tvisSaved.setText("Đã lưu(" + databaseHelper.countSavedQuestion()+")");
         tvBBcount.setText("Đã học " + databaseHelper.countDoneQuestion("BB") +"/"+databaseHelper.countQuestion("BB"));
         tvKNcount.setText("Đã học " + databaseHelper.countDoneQuestion("KN") +"/"+databaseHelper.countQuestion("KN"));
-        tvDLcount.setText("Đã học " + databaseHelper.countDoneQuestion("DL") +"/"+databaseHelper.countQuestion("DL"));
+        tvDLcount.setText("Đã học " + databaseHelper.countDoneEssQuestion() +"/"+databaseHelper.countEssQuestion());
         tvSHcount.setText("Đã học " + databaseHelper.countDoneQuestion("SH") +"/"+databaseHelper.countQuestion("SH"));
         tvCTcount.setText("Đã học " + databaseHelper.countDoneQuestion("CT") +"/"+databaseHelper.countQuestion("CT"));
         tvKTcount.setText("Đã học " + databaseHelper.countDoneQuestion("KT") +"/"+databaseHelper.countQuestion("KT"));
         tvVHcount.setText("Đã học " + databaseHelper.countDoneQuestion("VH") +"/"+databaseHelper.countQuestion("VH"));
-
+        tvNVcount.setText("Đã học " + databaseHelper.countDoneQuestion("NV") +"/"+databaseHelper.countQuestion("NV"));
     }
     private void function(){
         cvDiemLiet.setOnClickListener(view -> {
@@ -111,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         cvKhaiNiem.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
             intent.putExtra("type","khainiem");
+            startActivity(intent);
+        });
+        cvNghiepVu.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, ReviewActivity.class);
+            intent.putExtra("type","nghiepvu");
             startActivity(intent);
         });
         cvTest.setOnClickListener(view -> {

@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
-    android:id="@+id/cardview_sign_item"
+<androidx.cardview.widget.CardView android:id="@+id/cardview_sign_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="3dp"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    app:cardCornerRadius="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,6 +62,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <TextView
+                    android:paddingLeft="5dp"
                     android:id="@+id/tv_sign_description"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

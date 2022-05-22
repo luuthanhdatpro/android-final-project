@@ -64,6 +64,7 @@
         android:orientation="horizontal"
         android:background="@drawable/corner_radius"
         android:layout_marginLeft="0dp"
+        android:gravity="center"
         android:layout_marginRight="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -108,38 +109,7 @@
                 </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="8dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="40dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:background="@color/white"
-                    android:src="@drawable/lightbulb" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:text="Mẹo"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_sign"
@@ -203,40 +173,6 @@
                     android:layout_height="wrap_content"
                     android:padding="6dp"
                     android:text="Đã lưu"
-                    android:textColor="@color/black"
-                    android:textSize="14dp" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="10dp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/image"
-                    android:layout_width="59dp"
-                    android:layout_height="60dp"
-                    android:scaleType="centerCrop"
-                    android:background="@color/white"
-                    android:src="@drawable/car" />
-
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="6dp"
-                    android:text="Sa hình"
                     android:textColor="@color/black"
                     android:textSize="14dp" />
 
@@ -717,7 +653,69 @@
                         android:textSize="17dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_nghiepvu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginLeft="3dp"
+                app:cardCornerRadius="8dp"
+                >
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="51dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp">
+
+                        <ImageButton
+                            android:id="@+id/image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
+                            android:background="@color/white"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/car" />
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:padding="6dp"
+                            android:text="Nghiệp vụ vận tải"
+                            android:textColor="@color/black"
+                            android:textSize="18dp" />
+
+
+                    </LinearLayout>
+
+                    <ProgressBar
+                        android:id="@+id/progressBarNV"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="390dp"
+                        android:layout_height="0dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_weight="1"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_NV_count"
+                        android:layout_width="150dp"
+                        android:layout_height="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:text="100 câu hỏi"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </ScrollView>

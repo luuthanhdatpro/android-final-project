@@ -55,7 +55,7 @@ public class ReviewActivity extends AppCompatActivity {
                 questionList = databaseHelper.getQuestionByType("VH");
                 break;
             case "diemliet":
-                questionList = databaseHelper.getQuestionByType("DL");
+                questionList = databaseHelper.getEssQuestion();
                 break;
             case "sahinh":
                 questionList = databaseHelper.getQuestionByType("SH");
@@ -67,10 +67,13 @@ public class ReviewActivity extends AppCompatActivity {
                 questionList = databaseHelper.getQuestionByType("KT");
                 break;
             case "khainiem":
-                questionList = databaseHelper.getQuestionByType("KNQTGT");
+                questionList = databaseHelper.getQuestionByType("KN");
                 break;
             case "bienbao":
                 questionList = databaseHelper.getQuestionByType("BB");
+                break;
+            case "nghiepvu":
+                questionList = databaseHelper.getQuestionByType("NV");
                 break;
             default:
                 questionList = databaseHelper.getQuestionByType("KNQTGT");
